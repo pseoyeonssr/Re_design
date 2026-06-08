@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>POP MART | SKULLPANDA</title>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Pretendard:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: #08080a;
+      color: #f4f0ff;
+      font-family: 'Pretendard', sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* HEADER */
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 28px 60px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);
+    }
+
+    .logo {
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      border: 1px solid #fff;
+      padding: 6px 10px;
+    }
+
+    nav {
+      display: flex;
+      gap: 36px;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    nav a:hover {
+      color: #a259ff;
+    }
+
+    /* HERO */
+    .hero {
+      height: 100vh;
+      padding: 120px 60px 60px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      align-items: center;
+      position: relative;
+      background:
+        radial-gradient(circle at 70% 40%, rgba(162,89,255,0.35), transparent 35%),
+        radial-gradient(circle at 20% 70%, rgba(87,45,140,0.25), transparent 35%),
+        #08080a;
+    }
+
+    .hero-text h1 {
+      font-family: 'Cinzel', serif;
+      font-size: 92px;
+      line-height: 0.95;
+      letter-spacing: 4px;
+      margin-bottom: 24px;
+    }
+
+    .hero-text p {
+      font-size: 18px;
+      letter-spacing: 8px;
+      color: #c9b6ff;
+      margin-bottom: 40px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      border: 1px solid #a259ff;
+      color: #fff;
+      font-size: 12px;
+      letter-spacing: 2px;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background: #a259ff;
+      color: #08080a;
+    }
+
+    .hero-image {
+      height: 620px;
+      border-radius: 50%;
+      background:
+        linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)),
+        url("skullpanda-main.jpg");
+      background-size: cover;
+      background-position: center;
+      box-shadow: 0 0 80px rgba(162,89,255,0.45);
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .section-number {
+      color: #a259ff;
+      font-size: 22px;
+      margin-bottom: 20px;
+      font-family: 'Cinzel', serif;
+    }
+
+    section {
+      padding: 120px 60px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* ABOUT */
+    .about {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about h2,
+    .collection h2,
+    .gallery h2,
+    .event h2 {
+      font-family: 'Cinzel', serif;
+      font-size: 48px;
+      margin-bottom: 28px;
+    }
+
+    .about p {
+      line-height: 1.8;
+      color: #d7d0e8;
+      font-size: 16px;
+    }
+
+    .about-img {
+      height: 420px;
+      background: url("skullpanda-about.jpg") center/cover;
+      border: 1px solid rgba(255,255,255,0.15);
+      filter: grayscale(25%);
+    }
+
+    /* COLLECTION */
+    .collection-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 40px;
+    }
+
+    .card {
+      background: #111116;
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 18px;
+      transition: 0.3s;
+    }
+
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: #a259ff;
+      box-shadow: 0 0 30px rgba(162,89,255,0.25);
+    }
+
+    .card-img {
+      height: 300px;
+      background: url("collection-01.jpg") center/cover;
+      margin-bottom: 20px;
+    }
+
+    .card:nth-child(2) .card-img {
+      background-image: url("collection-02.jpg");
+    }
+
+    .card:nth-child(3) .card-img {
+      background-image: url("collection-03.jpg");
+    }
+
+    .card h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #aaa2ba;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    /* GALLERY */
+    .gallery-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1.3fr 0.8fr;
+      gap: 20px;
+      align-items: end;
+      margin-top: 40px;
+    }
+
+    .gallery-img {
+      background: url("gallery-01.jpg") center/cover;
+      border: 1px solid rgba(255,255,255,0.12);
+    }
+
+    .gallery-img:nth-child(1) {
+      height: 360px;
+    }
+
+    .gallery-img:nth-child(2) {
+      height: 500px;
+      background-image: url("gallery-02.jpg");
+    }
+
+    .gallery-img:nth-child(3) {
+      height: 280px;
+      background-image: url("gallery-03.jpg");
+    }
+
+    /* EVENT */
+    .event-box {
+      margin-top: 40px;
+      padding: 50px;
+      border: 1px solid #a259ff;
+      background:
+        linear-gradient(135deg, rgba(162,89,255,0.18), transparent),
+        #111116;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .event-box h3 {
+      font-family: 'Cinzel', serif;
+      font-size: 36px;
+      margin-bottom: 16px;
+    }
+
+    .event-box p {
+      color: #cfc7df;
+      line-height: 1.7;
+    }
+
+    footer {
+      padding: 40px 60px;
+      color: #777;
+      font-size: 12px;
+      display: flex;
+      justify-content: space-between;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 900px) {
+      header {
+        padding: 24px;
+      }
+
+      nav {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        padding: 120px 24px 60px;
+      }
+
+      .hero-text h1 {
+        font-size: 58px;
+      }
+
+      .hero-image {
+        height: 420px;
+        margin-top: 40px;
+      }
+
+      section {
+        padding: 80px 24px;
+      }
+
+      .about,
+      .collection-grid,
+      .gallery-wrap {
+        grid-template-columns: 1fr;
+      }
+
+      .event-box {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">POP MART</div>
+    <nav>
+      <a href="#about">ABOUT</a>
+      <a href="#collection">COLLECTION</a>
+      <a href="#gallery">GALLERY</a>
+      <a href="#event">EVENT</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="hero-text">
+        <h1>SKULL<br>PANDA</h1>
+        <p>A WORLD OF EMOTIONS</p>
+        <a href="#about" class="btn">EXPLORE MORE</a>
+      </div>
+
+      <div class="hero-image"></div>
+    </section>
+
+    <section class="about" id="about">
+      <div>
+        <div class="section-number">01</div>
+        <h2>ABOUT<br>SKULLPANDA</h2>
+        <p>
+          SKULLPANDA는 POP MART의 대표적인 아트토이 캐릭터로,
+          몽환적이고 신비로운 분위기와 감정적인 세계관을 가진 시리즈이다.
+          본 웹사이트는 SKULLPANDA의 감성과 컬렉션을 디지털 전시 형태로 보여준다.
+        </p>
+      </div>
+      <div class="about-img"></div>
+    </section>
+
+    <section class="collection" id="collection">
+      <div class="section-number">02</div>
+      <h2>COLLECTION</h2>
+
+      <div class="collection-grid">
+        <div class="card">
+          <div class="card-img"></div>
+          <h3>The Sound</h3>
+          <p>소리와 감정을 시각적으로 표현한 몽환적인 시리즈.</p>
+        </div>
+           
+        <div class="card">
+          <div class="card-img"></div>
+          <h3>Warmth</h3>
+          <p>따뜻함과 외로움이 공존하는 감성적인 컬렉션.</p>
+        </div>
+
+        <div class="card">
+          <div class="card-img"></div>
+          <h3>Winter Symphony</h3>
+          <p>겨울의 차가운 분위기와 음악적 감성을 담은 시리즈.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+      <div class="section-number">03</div>
+      <h2>GALLERY</h2>
+
+      <div class="gallery-wrap">
+        <div class="gallery-img"></div>
+        <div class="gallery-img"></div>
+        <div class="gallery-img"></div>
+      </div>
+    </section>
+
+    <section class="event" id="event">
+      <div class="section-number">04</div>
+      <h2>EVENT</h2>
+
+      <div class="event-box">
+        <div>
+          <h3>NEW RELEASE</h3>
+          <p>
+            새로운 SKULLPANDA 컬렉션과 프로모션 소식을 만나보세요.
+            감정의 조각들을 수집하는 특별한 전시가 시작됩니다.
+          </p>
+        </div>
+        <a href="#" class="btn">VIEW EVENT</a>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>POP MART × SKULLPANDA</span>
+    <span>Promotional Website Design</span>
+  </footer>
+
+</body>
+</html>
