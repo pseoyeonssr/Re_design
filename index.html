@@ -3,12 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>POP MART | SKULLPANDA</title>
 
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Pretendard:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Noto+Sans+KR:wght@300;400;500;700&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -17,10 +18,14 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       background: #08080a;
       color: #f4f0ff;
-      font-family: 'Pretendard', sans-serif;
+      font-family: 'Noto Sans KR', sans-serif;
       overflow-x: hidden;
     }
 
@@ -30,6 +35,7 @@
     }
 
     /* HEADER */
+
     header {
       position: fixed;
       top: 0;
@@ -40,11 +46,12 @@
       justify-content: space-between;
       align-items: center;
       z-index: 100;
-      background: linear-gradient(to bottom, rgba(0,0,0,0.7), transparent);
+      background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+      backdrop-filter: blur(4px);
     }
 
     .logo {
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 700;
       letter-spacing: 1px;
       border: 1px solid #fff;
@@ -58,21 +65,59 @@
       letter-spacing: 2px;
     }
 
+    nav a {
+      transition: color 0.3s ease;
+    }
+
     nav a:hover {
       color: #a259ff;
     }
 
+    /* BUTTON */
+
+    .btn {
+      display: inline-block;
+      padding: 14px 28px;
+      border: 1px solid #a259ff;
+      color: #fff;
+      font-size: 12px;
+      letter-spacing: 2px;
+      position: relative;
+      overflow: hidden;
+      transition: 0.3s;
+      z-index: 1;
+    }
+
+    .btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #a259ff;
+      transform: translateX(-100%);
+      transition: transform 0.35s ease;
+      z-index: -1;
+    }
+
+    .btn:hover::before {
+      transform: translateX(0);
+    }
+
+    .btn:hover {
+      color: #08080a;
+    }
+
     /* HERO */
+
     .hero {
-      height: 100vh;
+      min-height: 100vh;
       padding: 120px 60px 60px;
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
       align-items: center;
       position: relative;
       background:
-        radial-gradient(circle at 70% 40%, rgba(162,89,255,0.35), transparent 35%),
-        radial-gradient(circle at 20% 70%, rgba(87,45,140,0.25), transparent 35%),
+        radial-gradient(circle at 72% 42%, rgba(162,89,255,0.35), transparent 34%),
+        radial-gradient(circle at 20% 75%, rgba(87,45,140,0.25), transparent 35%),
         #08080a;
     }
 
@@ -91,31 +136,91 @@
       margin-bottom: 40px;
     }
 
-    .btn {
-      display: inline-block;
-      padding: 14px 28px;
-      border: 1px solid #a259ff;
-      color: #fff;
-      font-size: 12px;
-      letter-spacing: 2px;
-      transition: 0.3s;
-    }
-
-    .btn:hover {
-      background: #a259ff;
-      color: #08080a;
+    .hero-image-link {
+      display: block;
+      position: relative;
+      overflow: hidden;
+      border-radius: 50%;
     }
 
     .hero-image {
+      position: relative;
       height: 620px;
       border-radius: 50%;
       background:
-        linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.5)),
+        linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.55)),
         url("skullpanda-main.jpg");
       background-size: cover;
       background-position: center;
       box-shadow: 0 0 80px rgba(162,89,255,0.45);
       border: 1px solid rgba(255,255,255,0.15);
+      transition: transform 0.8s ease, filter 0.8s ease, box-shadow 0.8s ease;
+    }
+
+    .hero-image-link:hover .hero-image {
+      transform: scale(1.08);
+      filter: brightness(1.15) contrast(1.1);
+      box-shadow: 0 0 120px rgba(162,89,255,0.75);
+    }
+
+    .hero-overlay {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      background: rgba(8, 8, 10, 0.48);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .hero-overlay span {
+      border: 1px solid #a259ff;
+      padding: 14px 24px;
+      color: #fff;
+      font-size: 12px;
+      letter-spacing: 3px;
+      background: rgba(0,0,0,0.5);
+    }
+
+    .hero-image-link:hover .hero-overlay {
+      opacity: 1;
+    }
+
+    .scroll-down {
+      position: absolute;
+      bottom: 40px;
+      left: 60px;
+      font-size: 11px;
+      letter-spacing: 3px;
+      color: #a259ff;
+      writing-mode: vertical-rl;
+      animation: floatText 1.8s ease-in-out infinite;
+    }
+
+    @keyframes floatText {
+      0% {
+        transform: translateY(0);
+        opacity: 0.5;
+      }
+
+      50% {
+        transform: translateY(12px);
+        opacity: 1;
+      }
+
+      100% {
+        transform: translateY(0);
+        opacity: 0.5;
+      }
+    }
+
+    /* COMMON SECTION */
+
+    section {
+      padding: 120px 60px;
+      border-top: 1px solid rgba(255,255,255,0.08);
     }
 
     .section-number {
@@ -125,19 +230,6 @@
       font-family: 'Cinzel', serif;
     }
 
-    section {
-      padding: 120px 60px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    /* ABOUT */
-    .about {
-      display: grid;
-      grid-template-columns: 0.8fr 1.2fr;
-      gap: 80px;
-      align-items: center;
-    }
-
     .about h2,
     .collection h2,
     .gallery h2,
@@ -145,22 +237,43 @@
       font-family: 'Cinzel', serif;
       font-size: 48px;
       margin-bottom: 28px;
+      letter-spacing: 1px;
+    }
+
+    /* ABOUT */
+
+    .about {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 80px;
+      align-items: center;
     }
 
     .about p {
-      line-height: 1.8;
+      line-height: 1.9;
       color: #d7d0e8;
       font-size: 16px;
+      word-break: keep-all;
     }
 
     .about-img {
       height: 420px;
-      background: url("skullpanda-about.jpg") center/cover;
+      background:
+        linear-gradient(rgba(0,0,0,0.05), rgba(0,0,0,0.45)),
+        url("skullpanda-about.jpg") center/cover;
       border: 1px solid rgba(255,255,255,0.15);
-      filter: grayscale(25%);
+      filter: grayscale(20%);
+      transition: transform 0.7s ease, filter 0.7s ease, box-shadow 0.7s ease;
+    }
+
+    .about-img:hover {
+      transform: scale(1.03);
+      filter: grayscale(0%) brightness(1.08);
+      box-shadow: 0 0 45px rgba(162,89,255,0.35);
     }
 
     /* COLLECTION */
+
     .collection-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -169,22 +282,40 @@
     }
 
     .card {
+      display: block;
       background: #111116;
       border: 1px solid rgba(255,255,255,0.12);
       padding: 18px;
-      transition: 0.3s;
+      transition: 0.4s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(162,89,255,0.18), transparent 50%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      pointer-events: none;
+    }
+
+    .card:hover::after {
+      opacity: 1;
     }
 
     .card:hover {
-      transform: translateY(-8px);
+      transform: translateY(-12px);
       border-color: #a259ff;
-      box-shadow: 0 0 30px rgba(162,89,255,0.25);
+      box-shadow: 0 0 35px rgba(162,89,255,0.35);
     }
 
     .card-img {
       height: 300px;
       background: url("collection-01.jpg") center/cover;
       margin-bottom: 20px;
+      transition: transform 0.7s ease, filter 0.7s ease;
     }
 
     .card:nth-child(2) .card-img {
@@ -195,19 +326,48 @@
       background-image: url("collection-03.jpg");
     }
 
+    .card:hover .card-img {
+      transform: scale(1.08);
+      filter: brightness(1.2) saturate(1.2);
+    }
+
     .card h3 {
       font-family: 'Cinzel', serif;
       font-size: 22px;
       margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
     }
 
     .card p {
       color: #aaa2ba;
       font-size: 14px;
       line-height: 1.6;
+      position: relative;
+      z-index: 1;
+      word-break: keep-all;
+    }
+
+    .card-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: #a259ff;
+      font-size: 12px;
+      letter-spacing: 2px;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: 0.4s ease;
+      position: relative;
+      z-index: 1;
+    }
+
+    .card:hover .card-link {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     /* GALLERY */
+
     .gallery-wrap {
       display: grid;
       grid-template-columns: 1fr 1.3fr 0.8fr;
@@ -219,6 +379,34 @@
     .gallery-img {
       background: url("gallery-01.jpg") center/cover;
       border: 1px solid rgba(255,255,255,0.12);
+      position: relative;
+      overflow: hidden;
+      transition: transform 0.7s ease, filter 0.7s ease, box-shadow 0.7s ease;
+    }
+
+    .gallery-img::before {
+      content: "VIEW";
+      position: absolute;
+      inset: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: rgba(8,8,10,0.52);
+      color: #fff;
+      font-size: 12px;
+      letter-spacing: 4px;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .gallery-img:hover::before {
+      opacity: 1;
+    }
+
+    .gallery-img:hover {
+      transform: scale(1.04);
+      filter: brightness(1.12);
+      box-shadow: 0 0 35px rgba(162,89,255,0.32);
     }
 
     .gallery-img:nth-child(1) {
@@ -236,6 +424,7 @@
     }
 
     /* EVENT */
+
     .event-box {
       margin-top: 40px;
       padding: 50px;
@@ -247,6 +436,12 @@
       justify-content: space-between;
       align-items: center;
       gap: 40px;
+      transition: box-shadow 0.4s ease, transform 0.4s ease;
+    }
+
+    .event-box:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 0 45px rgba(162,89,255,0.25);
     }
 
     .event-box h3 {
@@ -258,7 +453,10 @@
     .event-box p {
       color: #cfc7df;
       line-height: 1.7;
+      word-break: keep-all;
     }
+
+    /* FOOTER */
 
     footer {
       padding: 40px 60px;
@@ -270,6 +468,7 @@
     }
 
     /* RESPONSIVE */
+
     @media (max-width: 900px) {
       header {
         padding: 24px;
@@ -286,6 +485,11 @@
 
       .hero-text h1 {
         font-size: 58px;
+      }
+
+      .hero-text p {
+        font-size: 13px;
+        letter-spacing: 5px;
       }
 
       .hero-image {
@@ -307,6 +511,16 @@
         flex-direction: column;
         align-items: flex-start;
       }
+
+      footer {
+        padding: 32px 24px;
+        flex-direction: column;
+        gap: 12px;
+      }
+
+      .scroll-down {
+        left: 24px;
+      }
     }
   </style>
 </head>
@@ -315,6 +529,7 @@
 
   <header>
     <div class="logo">POP MART</div>
+
     <nav>
       <a href="#about">ABOUT</a>
       <a href="#collection">COLLECTION</a>
@@ -324,6 +539,8 @@
   </header>
 
   <main>
+
+    <!-- HERO -->
     <section class="hero">
       <div class="hero-text">
         <h1>SKULL<br>PANDA</h1>
@@ -331,9 +548,18 @@
         <a href="#about" class="btn">EXPLORE MORE</a>
       </div>
 
-      <div class="hero-image"></div>
+      <a href="https://www.popmart.com/" target="_blank" class="hero-image-link">
+        <div class="hero-image">
+          <div class="hero-overlay">
+            <span>VISIT POP MART</span>
+          </div>
+        </div>
+      </a>
+
+      <div class="scroll-down">SCROLL</div>
     </section>
 
+    <!-- ABOUT -->
     <section class="about" id="about">
       <div>
         <div class="section-number">01</div>
@@ -344,34 +570,42 @@
           본 웹사이트는 SKULLPANDA의 감성과 컬렉션을 디지털 전시 형태로 보여준다.
         </p>
       </div>
+
       <div class="about-img"></div>
     </section>
 
+    <!-- COLLECTION -->
     <section class="collection" id="collection">
       <div class="section-number">02</div>
       <h2>COLLECTION</h2>
 
       <div class="collection-grid">
-        <div class="card">
+
+        <a href="https://www.popmart.com/" target="_blank" class="card">
           <div class="card-img"></div>
           <h3>The Sound</h3>
           <p>소리와 감정을 시각적으로 표현한 몽환적인 시리즈.</p>
-        </div>
-           
-        <div class="card">
+          <span class="card-link">SHOP NOW →</span>
+        </a>
+
+        <a href="https://www.popmart.com/" target="_blank" class="card">
           <div class="card-img"></div>
           <h3>Warmth</h3>
           <p>따뜻함과 외로움이 공존하는 감성적인 컬렉션.</p>
-        </div>
+          <span class="card-link">SHOP NOW →</span>
+        </a>
 
-        <div class="card">
+        <a href="https://www.popmart.com/" target="_blank" class="card">
           <div class="card-img"></div>
           <h3>Winter Symphony</h3>
           <p>겨울의 차가운 분위기와 음악적 감성을 담은 시리즈.</p>
-        </div>
+          <span class="card-link">SHOP NOW →</span>
+        </a>
+
       </div>
     </section>
 
+    <!-- GALLERY -->
     <section class="gallery" id="gallery">
       <div class="section-number">03</div>
       <h2>GALLERY</h2>
@@ -383,6 +617,7 @@
       </div>
     </section>
 
+    <!-- EVENT -->
     <section class="event" id="event">
       <div class="section-number">04</div>
       <h2>EVENT</h2>
@@ -395,9 +630,11 @@
             감정의 조각들을 수집하는 특별한 전시가 시작됩니다.
           </p>
         </div>
-        <a href="#" class="btn">VIEW EVENT</a>
+
+        <a href="https://www.popmart.com/" target="_blank" class="btn">VIEW EVENT</a>
       </div>
     </section>
+
   </main>
 
   <footer>
